@@ -10,11 +10,7 @@ Simple example of appending to a file:
 
 .. code-block:: python
 
-    >>> from atomicio.api import transform
-    >>> def append_lines(stream):
-    ...     for item in stream:
-    ...         yield item + '\n'
-    ...     yield 'hi!\n'
-    ...     yield 'message\n'
-    ...
-    >>> transform('file.txt', append_lines)
+    from atomicio.api import atomic_write
+    with atomic_write(path) as (r,w):
+        for item in r:
+            w.write(process(item))
