@@ -1,17 +1,6 @@
-import errno
 import os
 from contextlib import contextmanager
 from tempfile import NamedTemporaryFile
-
-
-def touch(fname):
-    flags = os.O_CREAT | os.O_EXCL | os.O_WRONLY
-    try:
-        fp = os.open(fname, flags)
-    except OSError as e:
-        if e.errno == errno.EEXIST:
-            return
-        raise
 
 
 class AtomicWriter(object):
