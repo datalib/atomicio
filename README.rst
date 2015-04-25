@@ -5,7 +5,7 @@ Library for making atomic file writes. It is based on the principle
 of providing two streams: one reader stream and a writer stream.
 The reader stream is to be read and processed by the caller/user,
 and the results of processing written to the writer stream.
-Simple example of appending to a file:
+Simple example of replacing a file's contents:
 
 
 .. code-block:: python
