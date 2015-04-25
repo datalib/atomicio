@@ -19,24 +19,25 @@ def test_atomic_write(path, exist):
     assert path.read() == 'haha'
 
 
-def test_atomic_write_with_reading(path):
+@pytest.fixture
+def existent_path(path):
     path.write('ha')
+    return path
 
-    with atomic_write(str(path)) as (r,w):
+
+def test_atomic_write_with_reading(existent_path):
+    with atomic_write(str(existent_path)) as (r,w):
         for item in r:
             w.write(item)
             w.write(item)
+    assert existent_path.read() == 'haha'
 
-    assert path.read() == 'haha'
 
-
-def test_transform(path):
-    path.write('ha')
-
+def test_transform(existent_path):
     def func(r):
         for item in r:
             yield item
             yield item
 
-    transform(str(path), func)
-    assert path.read() == 'haha'
+    transform(str(existent_path), func)
+    assert existent_path.read() == 'haha'
