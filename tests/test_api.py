@@ -28,3 +28,15 @@ def test_atomic_write_with_reading(path):
             w.write(item)
 
     assert path.read() == 'haha'
+
+
+def test_transform(path):
+    path.write('ha')
+
+    def func(r):
+        for item in r:
+            yield item
+            yield item
+
+    transform(str(path), func)
+    assert path.read() == 'haha'
