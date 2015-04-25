@@ -1,17 +1,11 @@
 import os
-import errno
 from contextlib import contextmanager
 from .core import AtomicWriter
 
 
-def touch(fname):
-    flags = os.O_CREAT | os.O_EXCL | os.O_WRONLY
-    try:
-        fp = os.open(fname, flags)
-    except OSError as e:
-        if e.errno == errno.EEXIST:
-            return
-        raise
+def touch(fname, times=None):
+    with open(fname, 'a'):
+        os.utime(fname, times)
 
 
 @contextmanager

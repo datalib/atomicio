@@ -25,6 +25,7 @@ class AtomicWriter(object):
         reader, writer = self.get_streams()
         try:
             yield reader, writer
+            writer.flush()
             self.commit(writer)
         except:
             self.rollback(writer)
