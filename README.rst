@@ -1,6 +1,9 @@
 atomicio
 ========
 
+.. image:: https://travis-ci.org/datalib/atomicio.svg?branch=master
+    :target: https://travis-ci.org/datalib/atomicio
+
 Library for making atomic file writes. It is based on the principle
 of providing two streams: one reader stream and a writer stream.
 The reader stream is to be read and processed by the caller/user,
