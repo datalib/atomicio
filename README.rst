@@ -10,10 +10,7 @@ Simple example of replacing a file's contents:
 
 .. code-block:: python
 
-    from atomicio.api import transform
-
-    def func(r):
-        for line in r:
-            yield process(line)
-
-    transform('filename.txt', func)
+    from atomicio.api import atomic_write
+    with atomic_write(path) as w:
+        for item in r:
+            w.write(process(item))
