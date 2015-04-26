@@ -11,6 +11,6 @@ Simple example of replacing a file's contents:
 .. code-block:: python
 
     from atomicio.api import atomic_write
-    with atomic_write(path) as w:
+    with atomic_write(path) as (r,w):
         for item in r:
             w.write(process(item))
