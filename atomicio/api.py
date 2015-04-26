@@ -15,9 +15,3 @@ def atomic_write(filename, mode='w', read_mode='r'):
     with writer.context() as w:
         with open(filename, mode=read_mode) as r:
             yield r, w
-
-
-def transform(filename, function, **modes):
-    with atomic_write(filename, **modes) as (r, w):
-        for item in function(r):
-            w.write(item)
