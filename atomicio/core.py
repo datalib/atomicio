@@ -9,27 +9,22 @@ class AtomicWriter(object):
         self.mode = mode
 
     def commit(self, writer):
+        writer.flush()
         os.rename(writer.name,
                   self.path)
 
     def rollback(self, writer):
         os.unlink(writer.name)
 
-    def get_streams(self):
-        r = open(self.path, mode=self.mode)
-        w = NamedTemporaryFile(delete=False)
-        return r, w
+    def get_stream(self):
+        return NamedTemporaryFile(delete=False, mode=self.mode)
 
     @contextmanager
     def context(self):
-        reader, writer = self.get_streams()
-        try:
-            yield reader, writer
-            writer.flush()
-            self.commit(writer)
-        except:
-            self.rollback(writer)
-            raise
-        finally:
-            reader.close()
-            writer.close()
+        with self.get_stream() as writer:
+            try:
+                yield writer
+                self.commit(writer)
+            except:
+                self.rollback(writer)
+                raise

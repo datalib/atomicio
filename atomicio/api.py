@@ -9,14 +9,15 @@ def touch(fname, times=None):
 
 
 @contextmanager
-def atomic_write(filename, mode='r'):
-    touch(filename)
+def atomic_write(filename, mode='w'):
     writer = AtomicWriter(filename, mode=mode)
-    with writer.context() as streams:
-        yield streams
+    with writer.context() as wr:
+        yield wr
 
 
-def transform(filename, function, mode='r'):
-    with atomic_write(filename, mode) as (r, w):
-        for segment in function(r):
-            w.write(segment)
+def transform(filename, function, mode='w', read_mode='r'):
+    touch(filename)
+    with atomic_write(filename, mode) as w:
+        with open(filename, mode=read_mode) as r:
+            for line in function(r):
+                w.write(line)
