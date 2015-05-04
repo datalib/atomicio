@@ -11,7 +11,12 @@ def atomic_writer(tmpdir):
 
 def test_get_stream(atomic_writer):
     with atomic_writer.get_stream() as writer:
+        ctx = [writer]
         assert writer.name
+        assert not writer.closed
+
+    writer = ctx[0]
+    assert writer.closed
 
 
 def test_context_peaceful(atomic_writer):
