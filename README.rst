@@ -1,5 +1,5 @@
-atomicio
-========
+|logo| atomicio
+===============
 
 .. image:: https://travis-ci.org/datalib/atomicio.svg?branch=master
     :target: https://travis-ci.org/datalib/atomicio
@@ -18,8 +18,11 @@ that gets renamed and deleted after writing.
 
 There are many other libraries that provide this functionality in
 Python. This library's approach and API is inspired by `fatomic`_
-and `python-atomicwrites`_ respectively.
+and `python-atomicwrites`_ respectively. So far atomicio has not
+been tested on Windows but it shouldn't work because currently,
+``os.rename`` does not work on already created files.
 
 
 .. _fatomic: https://github.com/abarnert/fatomic
 .. _python-atomicwrites: https://github.com/untitaker/python-atomicwrites
+.. |logo| image:: https://raw.githubusercontent.com/datalib/atomicio/master/media/logo-small.png
