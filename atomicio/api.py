@@ -30,7 +30,9 @@ def atomic_write(filename, mode='w', read_mode='r'):
     """
     Given a *filename*, yields a pair of readable and
     writable opened with *read_mode* and *write_mode*
-    (respectively) file streams.
+    (respectively) file streams. The reader file is
+    guaranteed to not be changed when writing to the
+    writer stream.
 
     :param filename: A string filename
     :param mode: Mode to open the writer stream with.
