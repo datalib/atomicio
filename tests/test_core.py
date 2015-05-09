@@ -1,3 +1,4 @@
+import os
 import pytest
 from atomicio.core import AtomicWriter
 
@@ -24,6 +25,7 @@ def test_context_peaceful(atomic_writer):
         w.write('haha')
 
     assert open(atomic_writer.path).read() == 'haha'
+    assert not os.path.exists(w.name)
 
 
 def test_context_with_exception(atomic_writer):
@@ -33,3 +35,4 @@ def test_context_with_exception(atomic_writer):
             raise ValueError
 
     assert open(atomic_writer.path).read() == 'ha'
+    assert not os.path.exists(w.name)
