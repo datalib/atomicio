@@ -20,7 +20,7 @@ def test_get_stream(atomic_writer):
 
 
 def test_context_peaceful(atomic_writer):
-    with atomic_writer.context() as w:
+    with atomic_writer.transaction() as w:
         w.write('haha')
 
     assert open(atomic_writer.path).read() == 'haha'
@@ -28,7 +28,7 @@ def test_context_peaceful(atomic_writer):
 
 def test_context_with_exception(atomic_writer):
     with pytest.raises(ValueError):
-        with atomic_writer.context() as w:
+        with atomic_writer.transaction() as w:
             w.write('haha')
             raise ValueError
 

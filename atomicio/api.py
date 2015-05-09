@@ -38,6 +38,6 @@ def atomic_write(filename, mode='w', read_mode='r'):
     """
     touch(filename)
     writer = AtomicWriter(filename, mode=mode)
-    with writer.context() as w:
+    with writer.transaction() as w:
         with open(filename, mode=read_mode) as r:
             yield r, w

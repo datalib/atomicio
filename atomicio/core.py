@@ -45,7 +45,7 @@ class AtomicWriter(object):
         return NamedTemporaryFile(delete=False, mode=self.mode)
 
     @contextmanager
-    def context(self):
+    def transaction(self):
         """
         Context manager that opens the temporary file
         and yields it to the caller. Changes are then
