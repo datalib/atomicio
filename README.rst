@@ -1,4 +1,4 @@
-|logo| atomicio
+|logo| AtomicIO
 ===============
 
 .. image:: https://travis-ci.org/datalib/atomicio.svg?branch=master
