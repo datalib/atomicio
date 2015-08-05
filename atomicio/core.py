@@ -24,9 +24,9 @@ class AtomicWriter(object):
 
     def commit(self, writer):
         """
-        Commits the changes atomically (if it
-        fails then no changes are committed at
-        all) by renaming the temporary file.
+        Commits the changes atomically (if it fails then
+        no changes are committed at all) by renaming the
+        temporary file.
         """
         writer.flush()
         os.rename(writer.name,
